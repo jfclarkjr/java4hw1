@@ -5,4 +5,4 @@
  * @author joclark
  *
  */
-package com.jfclarkjr.java4hw1;
+package org.jfclarkjr.java4hw1;
