@@ -1,14 +1,17 @@
 package org.jfclarkjr.java4hw1;
 
+
 public class BinarySearch {
 
 	public static void main(String[] args)
 	{
-		int[] numbers = {1, 4, 16, 20, 45, 60, 120, 234, 500};
+		// Create a test array
+		int[] arrayTest = {1, 4, 16, 20, 45, 60, 120, 234, 500};
 		
-		System.out.println(binarySearch(numbers,120));
-
-
+		// Some example output of the binarySearch method
+		System.out.println(binarySearch(arrayTest,120));
+		System.out.println(binarySearch(arrayTest,119));
+		
 	}
 
 	public static int binarySearch(int[] a, int key) { 
@@ -16,7 +19,8 @@ public class BinarySearch {
 		int high = a.length - 1; 
 
 		while (low <= high) { 
-			int mid = (low + high) / 2; 
+			//int mid = (low + high) / 2; 
+			int mid = low + (high -low)/2;  // Corrected version
 			int midVal = a[mid]; 
 
 			if (midVal < key) 
