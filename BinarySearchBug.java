@@ -3,7 +3,7 @@ package org.jfclarkjr.java4hw1;
 /**
  * BinarySearch is a class used to test the java.util.Collections binary search method
  * <p>
- * This version contains the binarySearch method WITHOUT the binary search bug.
+ * This version contains the binarySearch method with the binary search bug.
  * <p>
  * Java 4 Homework assignment #1
  * 
@@ -12,7 +12,7 @@ package org.jfclarkjr.java4hw1;
  *
  *
  */
-public class BinarySearch {
+public class BinarySearchBug {
 
 	public static void main(String[] args)
 	{
@@ -29,15 +29,7 @@ public class BinarySearch {
 	 * The binarySearch method is from the java.util.Collections binary search method.
 	 * This is used here to test for the binary search bug, and to test a fix for this bug.
 	 * <p>
-	 * This version is corrected.  It does NOT contain the bug.
-	 * <p>
-	 * To prevent the integer overflow, the following calculation:
-	 * <br>
-	 * int mid = (low + high)/2
-	 * <br>
-	 * Has been replaced with this:
-	 * <br>
-	 * int mid = low + (high -low)/2
+	 * This version contains the bug.
 	 * 
 	 * @param a An array of integers sorted in increasing order
 	 * @param key The key to be looked up by the method
@@ -49,7 +41,7 @@ public class BinarySearch {
 		int high = a.length - 1; 
 
 		while (low <= high) { 
-			int mid = low + (high -low)/2;  // Corrected version 
+			int mid = (low + high) / 2; 
 			int midVal = a[mid]; 
 
 			if (midVal < key) 

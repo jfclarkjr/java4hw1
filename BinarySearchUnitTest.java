@@ -2,9 +2,30 @@ package org.jfclarkjr.java4hw1;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * This is a JUnit to test the BinarySearch.binarySearch method to find the
+ * binary search bug.
+ * <p>
+ * The bug is an integer overflow that can occur when using very large arrays
+ * (i.e. greater than (2 + 2 * (Integer.MAX_VALUE/3)) number of elements).
+ * In the JUnit tests, the integer overflow triggers an ArrayIndexOutOfBoundsException.
+ * <p>
+ * To prevent the integer overflow, the following calculation:
+ * <br>
+ * int mid = (low + high)/2
+ * <br>
+ * Is replaced with this in the corrected version:
+ * <br>
+ * int mid = low + (high -low)/2
+ * <p>
+ * Java 4 Homework assignment #1
+ * 
+ * @author John Clark
+ * @since 1.8
+ *
+ */
 public class BinarySearchUnitTest
 {
 
@@ -90,29 +111,31 @@ public class BinarySearchUnitTest
 		assertEquals(0,BinarySearch.binarySearch(array8, -Integer.MAX_VALUE));
 	}
 	
-	/* 
+	/** 
 	 * Test upper limits of the size of the array.
+	 * <p>
 	 * This particular test can't be run on my laptop
 	 * using the full Integer.MAX_VALUE due to insufficient memory.
-	 * Through trial and error, I found I have enough memory to run this with
-	 * an array of size [Integer.MAX_VALUE - 500000000].
-	 * This is enough to trigger the known error.
+	 * I found I have enough memory to run this with
+	 * an array of size [2 + 2 * (Integer.MAX_VALUE/3)].
+	 * This is the minimum array size needed to trigger the known error.
 	 */
 	@Test
 	public void testMaxSizeArray()
 	{
-		int maxNum = Integer.MAX_VALUE - 500000000;
+		int maxNum = 2 + 2 * (Integer.MAX_VALUE/3);
 		int largeArray[] = new int[maxNum];
 
+		// Populate the array with integer values
 		for (int i=0; i < maxNum; i++)
 		{
 			largeArray[i] = i;
 		}
 
 		// To test for the binary search bug, the key needs to be in an array element
-		// higher than the mid value.  In this case, if it's 823741824 or above
+		// higher than the mid value.  In this case, if it's 715827883 or above
 		// we'll encounter the error (if bug is present in the method).
-		assertEquals(823741824,BinarySearch.binarySearch(largeArray, 823741824));
+		assertEquals(715827883,BinarySearch.binarySearch(largeArray, 715827883));
 
 	}
 }
